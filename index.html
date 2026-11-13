@@ -51,21 +51,6 @@
 
   .footer{text-align:center;color:#bbb;font-size:12px;padding:10px 0 40px;}
 
-  .edit-fab{position:fixed;right:16px;bottom:22px;background:linear-gradient(135deg,#d9b670,#b8893f);color:#fff;padding:12px 18px;border-radius:999px;font-weight:600;box-shadow:0 6px 20px rgba(184,137,63,.5);font-size:14px;z-index:20;}
-
-  .mask{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:30;padding:20px;}
-  .mask.show{display:flex;}
-  .sheet{background:#fff;border-radius:16px;padding:20px;width:100%;max-width:360px;}
-  .sheet h3{font-size:17px;margin-bottom:14px;color:var(--dark);}
-  .sheet label{display:block;font-size:13px;color:#666;margin:12px 0 4px;}
-  .sheet input{width:100%;padding:11px 12px;border:1px solid #ddd;border-radius:10px;font-size:15px;outline:none;}
-  .sheet input:focus{border-color:var(--gold);}
-  .sheet .btns{display:flex;gap:10px;margin-top:18px;}
-  .sheet .btns button{flex:1;padding:12px 0;border:none;border-radius:10px;font-size:15px;font-weight:600;}
-  .sheet .save{background:linear-gradient(135deg,#d9b670,#b8893f);color:#fff;}
-  .sheet .cancel{background:#eee;color:#666;}
-  .hint{font-size:11px;color:var(--muted);margin-top:10px;text-align:center;}
-
   /* 产品实拍图缩略 */
   .thumb{width:62px;height:62px;border-radius:12px;background:#f3efe7;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;}
   .thumb img{width:100%;height:100%;object-fit:cover;}
@@ -131,25 +116,6 @@
   </div>
 
   <div class="footer">柳州市纯品贸易有限公司 · 欢迎夜场 / 酒馆 / 洋酒吧 / 餐饮洽谈合作</div>
-
-  <div class="edit-fab" onclick="openEdit()">✎ 编辑资料</div>
-
-  <div class="mask" id="mask" onclick="if(event.target===this)closeEdit()">
-    <div class="sheet">
-      <h3>填写你的公司资料</h3>
-      <label>公司名称</label><input id="iName" placeholder="如：柳州市XX酒业有限公司" />
-      <label>口号 / 定位</label><input id="iSlogan" placeholder="如：华润雪花柳州夜场总代理" />
-      <label>联系电话</label><input id="iPhone" placeholder="手机号" />
-      <label>微信号</label><input id="iWechat" placeholder="微信号" />
-      <label>公司地址</label><input id="iAddr" placeholder="广西柳州市..." />
-      <label>联系人</label><input id="iPerson" placeholder="你的名字" />
-      <div class="btns">
-        <button class="cancel" onclick="closeEdit()">取消</button>
-        <button class="save" onclick="saveEdit()">保存</button>
-      </div>
-      <div class="hint">资料仅保存在你这台手机/电脑浏览器，不会上传。</div>
-    </div>
-  </div>
 
   <div class="dmask" id="dmask" onclick="if(event.target===this)closeDetail()">
     <div class="dclose" onclick="closeDetail()">×</div>
@@ -280,54 +246,15 @@ function openDetail(p){
 function closeDetail(){document.getElementById('dmask').classList.remove('show');}
 
 
-// 资料编辑（localStorage 仅存本机）
-const KEY='lzjy_profile';
-function loadProfile(){
-  try{const d=JSON.parse(localStorage.getItem(KEY)||'{}');
-    if(d.name)document.getElementById('cName').textContent=d.name;
-    if(d.slogan)document.getElementById('cSlogan').textContent=d.slogan;
-    if(d.desc){document.getElementById('cDesc').textContent=d.desc;document.getElementById('cDesc2').textContent=d.desc;}
-    if(d.phone)document.getElementById('vPhone').textContent=d.phone;
-    if(d.wechat)document.getElementById('vWechat').textContent=d.wechat;
-    if(d.addr)document.getElementById('vAddr').textContent=d.addr;
-    if(d.person)document.getElementById('vPerson').textContent=d.person;
-  }catch(e){}
-}
-function openEdit(){
-  document.getElementById('iName').value=document.getElementById('cName').textContent;
-  document.getElementById('iPhone').value=document.getElementById('vPhone').textContent;
-  document.getElementById('iWechat').value=document.getElementById('vWechat').textContent;
-  document.getElementById('iAddr').value=document.getElementById('vAddr').textContent;
-  document.getElementById('iPerson').value=document.getElementById('vPerson').textContent;
-  document.getElementById('iSlogan').value=document.getElementById('cSlogan').textContent;
-  document.getElementById('mask').classList.add('show');
-}
-function closeEdit(){document.getElementById('mask').classList.remove('show');}
-function saveEdit(){
-  const d={
-    name:document.getElementById('iName').value.trim(),
-    slogan:document.getElementById('iSlogan').value.trim(),
-    phone:document.getElementById('iPhone').value.trim(),
-    wechat:document.getElementById('iWechat').value.trim(),
-    addr:document.getElementById('iAddr').value.trim(),
-    person:document.getElementById('iPerson').value.trim()
-  };
-  localStorage.setItem(KEY,JSON.stringify(d));
-  loadProfile();
-  closeEdit();
-  alert('已保存！你的资料会显示在这个页面上。\n（如需让客户也看到，需要把这个网页发布上网——告诉我，我帮你弄）');
-}
 function copy(k){
   const v=document.getElementById(k==='phone'?'vPhone':'vWechat').textContent;
-  if(v.indexOf('[')>-1){alert('请先点右下角「编辑资料」填写');return;}
   navigator.clipboard.writeText(v).then(()=>alert('已复制：'+v)).catch(()=>alert(v));
 }
 function callPhone(){
   const v=document.getElementById('vPhone').textContent;
-  if(v.indexOf('[')>-1){alert('请先点右下角「编辑资料」填写电话');return;}
   location.href='tel:'+v;
 }
-buildTabs();render();loadProfile();
+buildTabs();render();
 </script>
 </body>
 </html>
