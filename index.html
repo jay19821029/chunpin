@@ -51,6 +51,17 @@
 
   .footer{text-align:center;color:#bbb;font-size:12px;padding:10px 0 40px;}
 
+  /* 拿货咨询 CTA */
+  .cta{margin:8px 16px 4px;background:linear-gradient(150deg,#2a1d0c,#4a3415);
+    border-radius:16px;padding:20px 18px;color:#fff;box-shadow:0 6px 20px rgba(42,29,12,.25);}
+  .cta h3{font-size:17px;color:#f0d9a8;margin-bottom:6px;}
+  .cta p{font-size:13px;color:#d9d2c4;line-height:1.7;margin-bottom:14px;}
+  .cta .btns{display:flex;gap:10px;}
+  .cta .btns button{flex:1;padding:12px 0;border:none;border-radius:10px;font-size:15px;
+    font-weight:700;font-family:inherit;cursor:pointer;}
+  .cta .b-main{background:linear-gradient(135deg,#d9b670,#b8893f);color:#2a1d0c;}
+  .cta .b-sub{background:rgba(255,255,255,.12);color:#f0d9a8;border:1px solid rgba(240,217,168,.4) !important;}
+
   /* 产品实拍图缩略 */
   .thumb{width:62px;height:62px;border-radius:12px;background:#f3efe7;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;}
   .thumb img{width:100%;height:100%;object-fit:cover;}
@@ -85,6 +96,15 @@
   <div class="intro">
     <h3>主营业务</h3>
     <p id="cDesc2">华润雪花柳州夜场渠道代理，全品类酒水供应：啤酒、高端威士忌、干邑白兰地、红酒、苏打酒、白酒。欢迎夜场 / 酒馆 / 洋酒吧 / 餐饮洽谈合作、拿货咨询。</p>
+  </div>
+
+  <div class="cta">
+    <h3>拿货咨询 · 洽谈合作</h3>
+    <p>看中哪几款，直接截图发微信问价即可。夜场 / 酒馆 / 洋酒吧 / 餐饮均可供货，柳州本地仓，可看样、可试销。</p>
+    <div class="btns">
+      <button class="b-main" onclick="copy('wechat')">复制微信 · 咨询拿货</button>
+      <button class="b-sub" onclick="callPhone()">一键拨打</button>
+    </div>
   </div>
 
   <div class="contact" id="contactBox">
